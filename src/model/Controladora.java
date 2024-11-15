@@ -56,4 +56,38 @@ public class Controladora {
         } while (!tableroTresEnRaya[i][j].equals(" "));
         tableroTresEnRaya[i][j] = "X";
     }
+
+    public boolean jugadaHumana(int f, int c){
+    if(f >= 0 && f < 3 && c >= 0 && c < 3 && tableroTresEnRaya[f][c].equals(" ")) {
+        tableroTresEnRaya[f][c] = "O";
+        return true;
+    }
+    return false;
+}
+
+    public String verificarGanador(){
+      int[][] combinaciones = {
+        {0, 0, 0, 1, 0, 2},  
+        {1, 0, 1, 1, 1, 2},  
+        {2, 0, 2, 1, 2, 2},  
+        {0, 0, 1, 0, 2, 0},  
+        {0, 1, 1, 1, 2, 1},  
+        {0, 2, 1, 2, 2, 2},  
+        {0, 0, 1, 1, 2, 2},  
+        {0, 2, 1, 1, 2, 0}   
+    };
+
+    for (int[] combinacion : combinaciones) {
+        String opcionUno = tableroTresEnRaya[combinacion[0]][combinacion[1]];
+        String opcionDos = tableroTresEnRaya[combinacion[2]][combinacion[3]];
+        String opcionTres = tableroTresEnRaya[combinacion[4]][combinacion[5]];
+
+        if (opcionUno.equals(opcionDos) && opcionDos.equals(opcionTres) && !opcionUno.equals(" ")) {
+            return opcionUno; 
+        }
+    }
+
+   
+    return null;
+    }
 }

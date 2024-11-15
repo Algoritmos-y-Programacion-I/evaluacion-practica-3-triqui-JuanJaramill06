@@ -21,7 +21,7 @@ public class Executable {
         while (!flag) {
 
             System.out.println("\n\nBienvenido al menu:\n");
-            System.out.println("Opciones:\n" + "1. Imprimir tablero \n" + "2. Jugada de la máquina \n"
+            System.out.println("Opciones:\n" + "1. Imprimir tablero \n" + "2. Jugada de la maquina \n"
                     + "3. Jugada de humano \n" + "4. Verificar ganador \n" + "5. Salir del programa \n");
 
             int option = reader.nextInt();
@@ -64,15 +64,32 @@ public class Executable {
 
     private void jugadaMaquina() {
         cont.jugadaAleatoria();
-        System.out.println("La máquina ha realizado su jugada.");
+        System.out.println("La maquina ha realizado su jugada.");
         imprimirTablero();
     }
 
-    private void jugadaHumano() {
-        // Implementación de jugada de humano
+     private void jugadaHumano() {
+        System.out.println(" \n Ingrese la fila donde va a realizar su jugada, (Las filas van desde 0 hasta 2) : ");
+        int f = reader.nextInt();
+        System.out.println("\n Ingrese la columna donde va a realizar su jugada, (Las columnas van desde 0 hasta 2): ");
+        int c = reader.nextInt();
+        reader.nextLine();
+
+        boolean jugadaExitosa = cont.jugadaHumana(f, c);
+        if (jugadaExitosa) {
+            System.out.println("\n Jugada realizada con exito. \n");
+        } else {
+            System.out.println("\n Jugada invalida, intente nuevamente. \n ");
+        }
+        imprimirTablero();
     }
 
     private void validarGanador() {
-        // Implementación de la validación si alguien ya ganó el triqui
+            String ganador = cont.verificarGanador();
+        if (ganador != null) {
+            System.out.println("\n\n El ganador de esta partida es: " + ganador + ".");
+        } else {
+            System.out.println("\n\nTodavia no hay un ganador decisivo en la partida actual.");
+        }
     }
 }
